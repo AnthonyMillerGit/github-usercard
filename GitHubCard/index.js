@@ -9,6 +9,7 @@ axios
 .get('https://api.github.com/users/AnthonyMillerGit')
 .then((response) => {
   console.log('Response \n \n', response.data)
+  const userObject = response.data
 })
 .catch((error) => {
   console.log(error.response)
@@ -92,6 +93,15 @@ cardInfo.classList.add('card-info')
 name.classList.add('name')
 userName.classList.add('username')
 
+userImage.setAttribute('src', object.avatar_url)
+addressAnchor.setAttribute('href', object.html_url)
+
+name.textContent = object.name
+userName.textContent = object.login
+location.textContent = object.location
+followers.textContent = object.followers
+following.textContent = object.following
+bio.textContent = object.bio
 
 return card
 }
