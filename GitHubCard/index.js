@@ -1,8 +1,20 @@
+import axios from 'axios'
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios
+.get('https://api.github.com/users/AnthonyMillerGit')
+.then((response) => {
+  console.log('Response \n \n', response.data)
+  const userObject = response.data
+})
+.catch((error) => {
+  console.log(error.response)
+})
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -50,6 +62,51 @@ const followersArray = [];
     </div>
 */
 
+const divCard = document.querySelector('.cards')
+
+const cardMaker = function(object){
+  const card = document.createElement('div')
+  const userImage = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const userName = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const addressAnchor = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+card.appendChild(userImage)
+card.appendChild(cardInfo)
+cardInfo.appendChild(name)
+cardInfo.appendChild(userName)
+cardInfo.appendChild(location)
+cardInfo.appendChild(profile)
+profile.appendChild(addressAnchor)
+cardInfo.appendChild(followers)
+cardInfo.appendChild(following)
+cardInfo.appendChild(bio)
+
+card.classList.add('card')
+cardInfo.classList.add('card-info')
+name.classList.add('name')
+userName.classList.add('username')
+
+userImage.setAttribute('src', object.avatar_url)
+addressAnchor.setAttribute('href', object.html_url)
+
+name.textContent = object.name
+userName.textContent = object.login
+location.textContent = object.location
+followers.textContent = object.followers
+following.textContent = object.following
+bio.textContent = object.bio
+
+return card
+}
+
+console.log(cardMaker())
 /*
   List of LS Instructors Github username's:
     tetondan
